@@ -21,8 +21,9 @@ function App() {
         <input type="text" ref={lastName} required></input>
         <br />
         <button type="submit">Submit</button>
+        <p>{"Full Name: " + fullName}</p>
       </form>
-      {"Full Name: " + fullName}
+      
     </>
   );
 }
