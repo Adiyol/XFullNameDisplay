@@ -1,46 +1,53 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
-  let firstName = useRef();
-  let lastName = useRef();
-
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [fullName, setFullName] = useState("");
+
+  
   function onSubmit(e) {
-    e.preventDefault()
-    console.log(firstName.current.value, lastName.current.value, "values")
-    setFullName(firstName.current.value + " " + lastName.current.value);
+    e.preventDefault();
+    setFullName(firstName + " " + lastName);
   }
 
-  // function onInvalid(e) {
-  //   console.log("Invalid")
-  // }
-
-  function checkFilled() {
-    if(firstName.current && lastName.current) {
-      if(firstName.current.value && lastName.current.value) {
-        return true
-      } else {
-         false
-      }
-    } else {
-      return false
-    }
-  }
+  
   return (
     <>
       <h1>Full Name Display</h1>
-      <form onSubmit={onSubmit} >
+      <form onSubmit={onSubmit}>
         <label>First Name: </label>
-        <input type="text" ref={firstName} required></input>
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => {
+            setFirstName(e.target.value);
+            if (e.target.value === "") {
+              setFullName("");
+            }
+          }}
+          required
+        ></input>
         <br />
         <label>Last Name: </label>
-        <input type="text" ref={lastName} required ></input>
+        <input
+          type="text"
+          value={lastName}
+          onChange={(e) => {
+            setLastName(e.target.value);
+            if (e.target.value === "") {
+              setFullName("");
+            }
+          }}
+          required
+        ></input>
         <br />
-        <button  type="submit">Submit</button>
+        <button type="submit">Submit</button>
       </form>
-        {(checkFilled()) ? (<p>{"Full Name: " + fullName}</p>) : null}
-      
+      {firstName && lastName && fullName ? (
+        <p>{"Full Name: " + fullName}</p>
+      ) : null}
     </>
   );
 }
