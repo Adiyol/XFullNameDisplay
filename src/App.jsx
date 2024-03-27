@@ -22,7 +22,7 @@ function App() {
         <br />
         <button type="submit">Submit</button>
       </form>
-      {fullName}
+      {"Full Name: " + fullName}
     </>
   );
 }
